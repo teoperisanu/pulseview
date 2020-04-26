@@ -104,6 +104,7 @@ Device::Device(shared_ptr<sigrok::Configurable> configurable) :
 			bind_enum(name, "", key, capabilities, get, set);
 			break;
 
+		case SR_CONF_HIGH_RESOLUTION:
 		case SR_CONF_FILTER:
 		case SR_CONF_EXTERNAL_CLOCK:
 		case SR_CONF_RLE:
@@ -138,6 +139,9 @@ Device::Device(shared_ptr<sigrok::Configurable> configurable) :
 				bind_int(name, "", "", pair<int64_t, int64_t>(0, INT32_MAX), get, set);
 			break;
 
+		case SR_CONF_OFFSET:
+		case SR_CONF_TRIGGER_LEVEL:
+			bind_double(name, "", "", pair<double, double>(-25, 25), get, set);
 		default:
 			break;
 		}

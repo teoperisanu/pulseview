@@ -26,6 +26,7 @@
 #include <pv/prop/bool.hpp>
 #include <pv/prop/enum.hpp>
 #include <pv/prop/int.hpp>
+#include <pv/prop/double.hpp>
 
 #include <libsigrokcxx/libsigrokcxx.hpp>
 
@@ -46,6 +47,7 @@ using sigrok::Error;
 using pv::prop::Bool;
 using pv::prop::Enum;
 using pv::prop::Int;
+using pv::prop::Double;
 using pv::prop::Property;
 
 namespace pv {
@@ -185,6 +187,14 @@ void Device::bind_int(const QString &name, const QString &desc, QString suffix,
 
 	properties_.push_back(shared_ptr<Property>(new Int(name, desc, suffix,
 		range, getter, setter)));
+}
+
+void Device::bind_double(const QString &name, const QString &desc, QString suffix,
+		 boost::optional< pair<double, double> > range,
+		 prop::Property::Getter getter, prop::Property::Setter setter)
+{
+	assert(configurable_);
+	properties_.push_back(shared_ptr<Property>(new Double(name, desc, 2, suffix, range, 0.1, getter, setter)));
 }
 
 QString Device::print_timebase(Glib::VariantBase gvar)

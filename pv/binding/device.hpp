@@ -63,6 +63,9 @@ private:
 	void bind_int(const QString &name, const QString &desc, QString suffix,
 		boost::optional< pair<int64_t, int64_t> > range,
 		prop::Property::Getter getter, prop::Property::Setter setter);
+	void bind_double(const QString &name, const QString &desc, QString suffix,
+		      boost::optional< pair<double, double> > range,
+		      prop::Property::Getter getter, prop::Property::Setter setter);
 
 	static QString print_timebase(Glib::VariantBase gvar);
 	static QString print_vdiv(Glib::VariantBase gvar);
